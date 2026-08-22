@@ -2,16 +2,23 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { GraduationCap, CheckCircle2, Clock, Award, BookOpen, Sparkles, ArrowRight } from 'lucide-react';
 import { ACADEMY_COURSES } from '@/data/brandData';
 
 export default function AcademySection() {
   return (
-    <section id="academy" className="py-20 bg-cream-100 border-t border-gold-400/20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="academy" className="py-20 bg-cream-100 border-t border-gold-400/20 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-3xl mx-auto space-y-4 mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-mehndi-100 border border-gold-400/30 text-mehndi-800 text-xs uppercase tracking-widest font-semibold">
             <GraduationCap className="w-3.5 h-3.5 text-gold-600" />
             <span>Hasti Henna Academy</span>
@@ -22,16 +29,20 @@ export default function AcademySection() {
           <p className="text-sm sm:text-base text-mehndi-800/80 leading-relaxed font-light">
             Master the ancient craft of mehndi with structured hands-on training, expert cone handling techniques, and complete professional guidance.
           </p>
-        </div>
+        </motion.div>
 
         {/* Course Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {ACADEMY_COURSES.map((course) => (
-            <div
+          {ACADEMY_COURSES.map((course, idx) => (
+            <motion.div
               key={course.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: idx * 0.15 }}
+              whileHover={{ y: -6 }}
               className="rounded-3xl bg-white border-2 border-gold-400/30 shadow-xl overflow-hidden p-6 sm:p-8 flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative group"
             >
-              {/* Badge */}
               {course.badge && (
                 <span className="absolute top-6 right-6 px-3.5 py-1 rounded-full bg-gold-400 text-mehndi-950 text-[11px] font-bold uppercase tracking-wider shadow-sm">
                   {course.badge}
@@ -39,8 +50,6 @@ export default function AcademySection() {
               )}
 
               <div className="space-y-6">
-
-                {/* Course Title & Price */}
                 <div className="space-y-2 pr-12">
                   <span className="text-xs font-semibold text-gold-600 uppercase tracking-widest flex items-center gap-1.5">
                     <BookOpen className="w-4 h-4" />
@@ -61,7 +70,6 @@ export default function AcademySection() {
                   {course.description}
                 </p>
 
-                {/* Curriculum Breakdown */}
                 <div className="space-y-3 pt-4 border-t border-cream-200">
                   <h4 className="text-xs uppercase tracking-widest font-bold text-mehndi-950 flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-gold-500" />
@@ -77,7 +85,6 @@ export default function AcademySection() {
                   </ul>
                 </div>
 
-                {/* What's Included */}
                 <div className="p-4 rounded-2xl bg-cream-50 border border-gold-400/20 space-y-2">
                   <h5 className="text-xs font-bold text-mehndi-950 flex items-center gap-1.5">
                     <Award className="w-4 h-4 text-gold-500" />
@@ -95,7 +102,6 @@ export default function AcademySection() {
 
               </div>
 
-              {/* Action Button */}
               <div className="pt-6">
                 <Link
                   href="#booking"
@@ -106,7 +112,7 @@ export default function AcademySection() {
                 </Link>
               </div>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 

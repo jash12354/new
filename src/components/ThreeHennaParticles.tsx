@@ -28,7 +28,10 @@ export default function ThreeHennaParticles() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    const count = 120;
+    // Particles count reduced on mobile for fast performance
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 50 : 120;
+
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
@@ -52,6 +55,7 @@ export default function ThreeHennaParticles() {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
+    // Custom Canvas Texture with subtle leaf / petal radial glow
     const canvas = document.createElement('canvas');
     canvas.width = 32;
     canvas.height = 32;
@@ -59,19 +63,21 @@ export default function ThreeHennaParticles() {
     if (ctx) {
       const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
       grad.addColorStop(0, 'rgba(255,255,255,1)');
-      grad.addColorStop(0.5, 'rgba(212,175,55,0.8)');
+      grad.addColorStop(0.4, 'rgba(212,175,55,0.8)');
       grad.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 32, 32);
+      ctx.beginPath();
+      ctx.arc(16, 16, 16, 0, Math.PI * 2);
+      ctx.fill();
     }
     const texture = new THREE.CanvasTexture(canvas);
 
     const material = new THREE.PointsMaterial({
-      size: 1.2,
+      size: isMobile ? 1.0 : 1.4,
       vertexColors: true,
       map: texture,
       transparent: true,
-      opacity: 0.7,
+      opacity: 0.65,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
@@ -86,15 +92,15 @@ export default function ThreeHennaParticles() {
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      particles.rotation.y = elapsedTime * 0.05;
-      particles.rotation.x = Math.sin(elapsedTime * 0.03) * 0.1;
+      particles.rotation.y = elapsedTime * (isMobile ? 0.02 : 0.04);
+      particles.rotation.x = Math.sin(elapsedTime * 0.02) * 0.08;
 
       const posAttr = geometry.attributes.position as THREE.BufferAttribute;
       const array = posAttr.array as Float32Array;
 
       for (let i = 0; i < count; i++) {
         const i3 = i * 3;
-        array[i3 + 1] += Math.sin(elapsedTime + array[i3]) * 0.01;
+        array[i3 + 1] += Math.sin(elapsedTime + array[i3]) * 0.008;
       }
       posAttr.needsUpdate = true;
 
@@ -120,6 +126,7 @@ export default function ThreeHennaParticles() {
       }
       geometry.dispose();
       material.dispose();
+      texture.dispose();
     };
   }, []);
 

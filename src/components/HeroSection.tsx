@@ -1,32 +1,84 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Calendar, MessageCircle, Sparkles, Award } from 'lucide-react';
 import { BRAND_INFO } from '@/data/brandData';
 import ThreeHennaParticles from './ThreeHennaParticles';
 
 export default function HeroSection() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 500], [0, -80]);
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0.4]);
+  const imageScale = useTransform(scrollY, [0, 500], [1, 0.95]);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth < 768) return;
+      const { clientX, clientY } = e;
+      const x = (clientX / window.innerWidth - 0.5) * 20; // -10 to 10
+      const y = (clientY / window.innerHeight - 0.5) * 20; // -10 to 10
+      setMousePos({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   const whatsappUrl = `https://wa.me/${BRAND_INFO.whatsappRaw}?text=Hello%20Hasti%20Henna!%20I%20would%20like%20to%20enquire%20about%20booking%20bridal%20or%20event%20mehndi.`;
 
   return (
     <section id="hero" className="relative min-h-screen bg-henna-dark text-cream-50 flex items-center pt-24 pb-16 overflow-hidden">
       <ThreeHennaParticles />
 
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-mehndi-600/20 rounded-full blur-3xl pointer-events-none" />
+      {/* Dynamic Mouse Reactive Lighting */}
+      <div
+        className="absolute top-1/4 left-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none transition-transform duration-500 ease-out"
+        style={{
+          transform: !isMobile ? `translate(${mousePos.x * 1.5}px, ${mousePos.y * 1.5}px)` : 'none',
+        }}
+      />
+      <div
+        className="absolute bottom-10 right-10 w-96 h-96 bg-mehndi-600/20 rounded-full blur-3xl pointer-events-none transition-transform duration-500 ease-out"
+        style={{
+          transform: !isMobile ? `translate(${-mousePos.x * 1.5}px, ${-mousePos.y * 1.5}px)` : 'none',
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <motion.div
+        style={{ y: heroY, opacity: heroOpacity }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          {/* Left Text Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="lg:col-span-7 space-y-6 text-center lg:text-left"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs uppercase tracking-widest font-semibold backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin-slow" />
               <span>Surat, Gujarat • Pan-India Booking</span>
             </div>
 
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-              Where <span className="text-gold-gradient italic">Tradition</span> Meets <span className="text-gold-gradient italic">Artistry</span>
+              HASTI HENNA
+              <span className="block text-2xl sm:text-3xl lg:text-4xl text-gold-gradient italic font-normal mt-2">
+                Where Tradition Meets Artistry
+              </span>
             </h1>
 
             <p className="text-base sm:text-lg text-cream-200/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
@@ -48,7 +100,7 @@ export default function HeroSection() {
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link
                 href="#booking"
-                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-mehndi-950 font-bold uppercase tracking-wider text-xs shadow-xl hover:shadow-gold-500/20 hover:scale-105 active:scale-95 transition-all duration-300"
+                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-mehndi-950 font-bold uppercase tracking-wider text-xs shadow-xl hover:shadow-gold-500/30 hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <Calendar className="w-4 h-4 text-mehndi-950" />
                 Book Your Mehndi
@@ -79,10 +131,24 @@ export default function HeroSection() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-5 relative flex justify-center">
-            <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border-2 border-gold-400/40 shadow-2xl group">
+          {/* Right Image Display with 3D Tilt */}
+          <motion.div
+            style={{ scale: imageScale }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="lg:col-span-5 relative flex justify-center perspective-1000"
+          >
+            <div
+              className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border-2 border-gold-400/40 shadow-2xl group transition-transform duration-300 ease-out"
+              style={{
+                transform: !isMobile
+                  ? `rotateY(${mousePos.x * 0.8}deg) rotateX(${-mousePos.y * 0.8}deg)`
+                  : 'none',
+              }}
+            >
               <img
                 src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&q=80&w=1200"
                 alt="Hasti Henna Bridal Mehndi Showcase"
@@ -99,10 +165,10 @@ export default function HeroSection() {
                 <p className="text-[11px] text-cream-300">Surat & Pan-India Event Bookings</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

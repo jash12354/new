@@ -2,15 +2,41 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion, Variants } from 'framer-motion';
 import { CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 import { SERVICES_LIST } from '@/data/brandData';
 
 export default function ServicesSection() {
-  return (
-    <section id="services" className="py-20 bg-cream-50 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
 
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0, 0, 0.2, 1] },
+    },
+  };
+
+  return (
+    <section id="services" className="py-20 bg-cream-50 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-3xl mx-auto space-y-4 mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-mehndi-100 border border-gold-400/40 text-mehndi-800 text-xs uppercase tracking-widest font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-gold-600" />
             <span>Our Offerings</span>
@@ -24,20 +50,30 @@ export default function ServicesSection() {
           <p className="text-xs text-gold-600 font-medium italic">
             * All listed prices are starting estimates and vary based on design complexity, location, and headcount.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {SERVICES_LIST.map((service) => (
-            <div
+            <motion.div
               key={service.id}
-              className="rounded-3xl bg-white border border-gold-400/25 shadow-lg overflow-hidden flex flex-col justify-between hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group"
+              variants={cardVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="rounded-3xl bg-white border border-gold-400/25 shadow-lg overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:border-gold-400/60 transition-all duration-300 group"
             >
               <div>
                 <div className="relative h-52 w-full overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
@@ -78,9 +114,9 @@ export default function ServicesSection() {
                 </Link>
               </div>
 
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Crown, Heart, CheckCircle2, Calendar } from 'lucide-react';
 
 export default function BridalSection() {
@@ -23,7 +24,13 @@ export default function BridalSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-          <div className="lg:col-span-7 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7 space-y-6"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs uppercase tracking-widest font-semibold">
               <Crown className="w-3.5 h-3.5 text-gold-400" />
               <span>Bespoke Bridal Couture</span>
@@ -65,13 +72,20 @@ export default function BridalSection() {
               </span>
             </div>
 
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-5 relative">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 relative"
+          >
             <div className="relative mx-auto max-w-md aspect-[3/4] rounded-3xl overflow-hidden border-2 border-gold-400/40 shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&q=80&w=1000"
                 alt="Bridal Henna Artistry Hasti Henna"
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-mehndi-950 via-transparent to-transparent opacity-70" />
@@ -80,7 +94,7 @@ export default function BridalSection() {
                 <p className="text-xs text-cream-200">100% Chemical-free Organic Stain Guarantee</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
