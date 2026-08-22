@@ -125,7 +125,7 @@ export default function BookingSystem() {
             Reserve Your <span className="text-gold-gradient italic">Henna Experience</span>
           </h2>
           <p className="text-xs sm:text-sm text-cream-200/80 max-w-xl mx-auto font-light leading-relaxed">
-            Submit your event details below. Hasti Henna will review availability and message you directly on WhatsApp with confirmed details and final custom quotes.
+            Submit your event details below. Hasti Henna will review availability and contact you on WhatsApp to confirm availability and pricing.
           </p>
         </div>
 
@@ -137,15 +137,15 @@ export default function BookingSystem() {
                 <Check className="w-8 h-8" />
               </div>
               <div className="space-y-2">
-                <h3 className="font-serif text-3xl font-bold text-gold-300">Booking Request Received!</h3>
-                <p className="text-sm text-cream-200 max-w-lg mx-auto leading-relaxed">
-                  Thank you, <span className="font-bold text-gold-300">{formData.fullName}</span>! Your booking request for <span className="font-bold text-gold-300">{formData.service}</span> on <span className="font-bold text-gold-300">{formData.eventDate}</span> has been received.
+                <h3 className="font-serif text-3xl font-bold text-gold-300">Thank You!</h3>
+                <p className="text-sm text-cream-200 max-w-lg mx-auto leading-relaxed font-medium">
+                  Thank you! Your booking request has been received. Hasti Henna will contact you on WhatsApp to confirm availability and pricing.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-black/40 border border-gold-400/20 text-xs text-cream-300 max-w-md mx-auto space-y-1">
-                <p className="font-semibold text-gold-400">Important Note:</p>
-                <p>This request is pending final WhatsApp confirmation by Hasti Henna. Click below to chat directly with your details pre-filled.</p>
+                <p className="font-semibold text-gold-400">Request Details:</p>
+                <p>Name: {formData.fullName} | Service: {formData.service} | Date: {formData.eventDate}</p>
               </div>
 
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -156,7 +156,7 @@ export default function BookingSystem() {
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold uppercase tracking-wider text-xs shadow-xl transition-all border border-gold-400/40"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  Confirm Instantly On WhatsApp
+                  Chat Directly On WhatsApp (+91 7573927521)
                 </a>
                 <button
                   onClick={() => {
@@ -165,7 +165,7 @@ export default function BookingSystem() {
                   }}
                   className="text-xs text-gold-300 underline hover:text-gold-200"
                 >
-                  Submit Another Booking
+                  Submit Another Booking Request
                 </button>
               </div>
             </div>
@@ -217,7 +217,7 @@ export default function BookingSystem() {
                         required
                         value={formData.whatsappNumber}
                         onChange={(e) => updateField('whatsappNumber', e.target.value)}
-                        placeholder="e.g. 9876543210"
+                        placeholder="e.g. 7573927521"
                         className="w-full px-4 py-3 rounded-xl bg-mehndi-900/80 border border-gold-400/30 text-cream-50 focus:border-gold-400 focus:outline-none"
                       />
                     </div>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Sparkles, Maximize2, X } from 'lucide-react';
 import { PORTFOLIO_ITEMS, PortfolioItem } from '@/data/brandData';
 
-const categories = ['All', 'Bridal', 'Wedding', 'Arabic', 'Indian', 'Couple', 'Events', 'Custom'] as const;
+const categories = ['All', 'Bridal', 'Wedding', 'Arabic', 'Indian', 'Events', 'Academy'] as const;
 
 export default function PortfolioGallery() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -27,10 +27,11 @@ export default function PortfolioGallery() {
             Portfolio of <span className="text-gold-gradient italic">Intricate Designs</span>
           </h2>
           <p className="text-sm sm:text-base text-mehndi-800/80 leading-relaxed font-light">
-            Explore our crafted collection across bridal, Arabic, traditional Indian, and customized story motifs.
+            Explore our curated collection across bridal, wedding celebrations, Arabic, traditional Indian motifs, and academy training.
           </p>
         </div>
 
+        {/* Category Filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {categories.map((cat) => (
             <button
@@ -47,6 +48,7 @@ export default function PortfolioGallery() {
           ))}
         </div>
 
+        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map((item) => (
             <div
@@ -57,6 +59,7 @@ export default function PortfolioGallery() {
               <img
                 src={item.image}
                 alt={item.title}
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-mehndi-950/90 via-mehndi-950/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
@@ -81,6 +84,7 @@ export default function PortfolioGallery() {
           ))}
         </div>
 
+        {/* Lightbox Modal */}
         {activeItem && (
           <div
             className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"

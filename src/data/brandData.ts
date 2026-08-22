@@ -26,7 +26,7 @@ export interface CourseItem {
 export interface PortfolioItem {
   id: string;
   title: string;
-  category: 'Bridal' | 'Wedding' | 'Arabic' | 'Indian' | 'Couple' | 'Events' | 'Custom';
+  category: 'Bridal' | 'Wedding' | 'Arabic' | 'Indian' | 'Events' | 'Academy';
   image: string;
   description: string;
   tag: string;
@@ -206,51 +206,51 @@ export const ACADEMY_COURSES: CourseItem[] = [
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     id: 'p1',
-    title: 'Royal Bridal Full-Arm Design',
+    title: 'Royal Bridal Full-Arm Artwork',
     category: 'Bridal',
     image: 'https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&q=80&w=1000',
-    description: 'Intricate custom bridal henna featuring couple portraits, sacred mantras, and detailed mandala palms.',
+    description: 'Detailed custom bridal henna featuring couple figures, sacred mantras, and intricate mandala palm compositions.',
     tag: 'Bridal Royalty',
   },
   {
     id: 'p2',
-    title: 'Modern Arabic Floral Flow',
+    title: 'Flowing Arabic Floral Cuffs',
     category: 'Arabic',
     image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=1000',
-    description: 'Bold diagonal floral trails with delicate leaf shading and open space elegance.',
+    description: 'Elegant diagonal floral trails with delicate leaf shading and open space framing.',
     tag: 'Arabic Elegance',
   },
   {
     id: 'p3',
-    title: 'Traditional Indian Sangeet Henna',
+    title: 'Traditional Indian Jaali & Peacock Henna',
     category: 'Indian',
     image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1000',
-    description: 'Symmetrical peacocks, intricate jaali work, and classic wrist cuffs.',
-    tag: 'Classic Heritage',
+    description: 'Symmetrical peacock motifs, intricate gridwork, and royal wrist bands.',
+    tag: 'Heritage Indian',
   },
   {
     id: 'p4',
-    title: 'Personalized Couple Story Motifs',
-    category: 'Couple',
+    title: 'Grand Wedding Sangeet Guest Service',
+    category: 'Wedding',
     image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=1000',
-    description: 'Featuring bride & groom initials, proposal dates, and custom symbolic skylines.',
-    tag: 'Bespoke Story',
+    description: 'Speedy yet highly graceful guest mehndi designs for family members and wedding guests.',
+    tag: 'Sangeet Party',
   },
   {
     id: 'p5',
-    title: 'Wedding Guest Henna Celebration',
+    title: 'Festive Group Event Henna Application',
     category: 'Events',
-    image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1000',
-    description: 'Fast, graceful, and elegant hand patterns for wedding guests.',
-    tag: 'Party Glamour',
+    image: 'https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&q=80&w=1000',
+    description: 'Fast-hands application by our professional team at a large celebration event.',
+    tag: 'Event Artistry',
   },
   {
     id: 'p6',
-    title: 'Minimalist Contemporary Cuff',
-    category: 'Custom',
-    image: 'https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&q=80&w=1000',
-    description: 'Geometric mandala palm combined with delicate finger lace pattern.',
-    tag: 'Modern Chic',
+    title: 'Academy Training & Pattern Worksheets',
+    category: 'Academy',
+    image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1000',
+    description: 'Hands-on practice sessions for students learning cone control, line consistency, and motifs.',
+    tag: 'Academy Practical',
   },
 ];
 
