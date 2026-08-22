@@ -1,0 +1,108 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { Calendar, MessageCircle, Sparkles, Award } from 'lucide-react';
+import { BRAND_INFO } from '@/data/brandData';
+import ThreeHennaParticles from './ThreeHennaParticles';
+
+export default function HeroSection() {
+  const whatsappUrl = `https://wa.me/${BRAND_INFO.whatsappRaw}?text=Hello%20Hasti%20Henna!%20I%20would%20like%20to%20enquire%20about%20booking%20bridal%20or%20event%20mehndi.`;
+
+  return (
+    <section id="hero" className="relative min-h-screen bg-henna-dark text-cream-50 flex items-center pt-24 pb-16 overflow-hidden">
+      <ThreeHennaParticles />
+
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-mehndi-600/20 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs uppercase tracking-widest font-semibold backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+              <span>Surat, Gujarat • Pan-India Booking</span>
+            </div>
+
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+              Where <span className="text-gold-gradient italic">Tradition</span> Meets <span className="text-gold-gradient italic">Artistry</span>
+            </h1>
+
+            <p className="text-base sm:text-lg text-cream-200/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+              {BRAND_INFO.subheading}
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs font-medium text-gold-200/80">
+              <span className="px-3 py-1 rounded-md bg-mehndi-900/80 border border-gold-400/20">Bridal</span>
+              <span>•</span>
+              <span className="px-3 py-1 rounded-md bg-mehndi-900/80 border border-gold-400/20">Weddings</span>
+              <span>•</span>
+              <span className="px-3 py-1 rounded-md bg-mehndi-900/80 border border-gold-400/20">Events</span>
+              <span>•</span>
+              <span className="px-3 py-1 rounded-md bg-mehndi-900/80 border border-gold-400/20">Academy</span>
+              <span>•</span>
+              <span className="px-3 py-1 rounded-md bg-mehndi-900/80 border border-gold-400/20">Natural Products</span>
+            </div>
+
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <Link
+                href="#booking"
+                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-mehndi-950 font-bold uppercase tracking-wider text-xs shadow-xl hover:shadow-gold-500/20 hover:scale-105 active:scale-95 transition-all duration-300"
+              >
+                <Calendar className="w-4 h-4 text-mehndi-950" />
+                Book Your Mehndi
+              </Link>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-gold-400/50 bg-mehndi-900/50 hover:bg-gold-400/10 text-cream-50 font-semibold uppercase tracking-wider text-xs backdrop-blur-md transition-all duration-300 hover:border-gold-400"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                Chat on WhatsApp
+              </a>
+            </div>
+
+            <div className="pt-6 border-t border-gold-400/15 grid grid-cols-3 gap-2 text-center lg:text-left text-xs text-cream-300/80">
+              <div className="space-y-1">
+                <span className="block font-bold text-gold-300">100% Organic</span>
+                <span className="text-[11px]">Dark Natural Stain</span>
+              </div>
+              <div className="space-y-1">
+                <span className="block font-bold text-gold-300">Customized</span>
+                <span className="text-[11px]">Bespoke Story Motifs</span>
+              </div>
+              <div className="space-y-1">
+                <span className="block font-bold text-gold-300">All India</span>
+                <span className="text-[11px]">On-Location Service</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="lg:col-span-5 relative flex justify-center">
+            <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border-2 border-gold-400/40 shadow-2xl group">
+              <img
+                src="https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&q=80&w=1200"
+                alt="Hasti Henna Bridal Mehndi Showcase"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-mehndi-950 via-transparent to-transparent opacity-80" />
+
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-black/60 backdrop-blur-md border border-gold-400/30 text-cream-100 space-y-1">
+                <div className="flex items-center justify-between text-xs text-gold-300 font-semibold">
+                  <span>Bridal Signature Work</span>
+                  <Award className="w-4 h-4 text-gold-400" />
+                </div>
+                <p className="text-sm font-serif font-bold text-cream-50">Hasti Henna Custom Bridal Design</p>
+                <p className="text-[11px] text-cream-300">Surat & Pan-India Event Bookings</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
