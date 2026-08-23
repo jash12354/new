@@ -2,26 +2,37 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Users, Calendar, Clock, ShieldCheck } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Users, Calendar, Clock, ShieldCheck, MapPin, Globe } from 'lucide-react';
 import { BRAND_INFO } from '@/data/brandData';
 
 export default function WeddingEventSection() {
+  const servedCities = ['Surat', 'Ahmedabad', 'Vadodara', 'Mumbai', 'Delhi NCR', 'Jaipur', 'Udaipur', 'Pan-India'];
+
   return (
-    <section className="py-20 bg-cream-100 border-y border-gold-400/20 relative">
+    <section className="py-20 bg-cream-100 border-y border-gold-400/20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-mehndi-950 via-mehndi-900 to-mehndi-950 rounded-3xl p-8 sm:p-12 text-cream-50 border border-gold-400/30 shadow-2xl relative overflow-hidden">
+
+        {/* Nationwide Event Card Container */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8 }}
+          className="bg-gradient-to-br from-mehndi-950 via-mehndi-900 to-mehndi-950 rounded-3xl p-8 sm:p-12 text-cream-50 border border-gold-400/30 shadow-2xl relative overflow-hidden"
+        >
           <div className="absolute top-0 right-0 w-80 h-80 bg-gold-400/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
 
-            <div className="lg:col-span-8 space-y-4">
+            <div className="lg:col-span-8 space-y-5">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs uppercase tracking-widest font-semibold">
                 <Users className="w-3.5 h-3.5 text-gold-400" />
-                <span>Large Event Capacity</span>
+                <span>Large Event Capacity • Pan-India Travel</span>
               </div>
 
               <h2 className="font-serif text-3xl sm:text-4xl font-bold leading-tight">
-                Weddings & Large-Scale <span className="text-gold-gradient italic">Event Services</span>
+                Weddings & Large-Scale <span className="text-gold-gradient italic">Event Services Across India</span>
               </h2>
 
               <div className="p-4 rounded-2xl bg-black/30 border border-gold-400/20 text-cream-200 text-sm space-y-2">
@@ -32,6 +43,29 @@ export default function WeddingEventSection() {
                 <p className="text-xs sm:text-sm text-cream-200/90 leading-relaxed">
                   &ldquo;{BRAND_INFO.maxEventCapacity}&rdquo;
                 </p>
+              </div>
+
+              {/* Nationwide Cities Tags */}
+              <div className="pt-1">
+                <p className="text-xs text-gold-300 font-semibold mb-2 flex items-center gap-1.5">
+                  <Globe className="w-3.5 h-3.5 text-gold-400" />
+                  Popular Service Destinations Across India:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {servedCities.map((city, cIdx) => (
+                    <motion.span
+                      key={city}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: cIdx * 0.08 }}
+                      className="px-3 py-1 rounded-full bg-mehndi-900 border border-gold-400/20 text-[11px] text-cream-200 flex items-center gap-1"
+                    >
+                      <MapPin className="w-3 h-3 text-gold-400" />
+                      {city}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
 
               <p className="text-xs sm:text-sm text-cream-300/80 leading-relaxed">
@@ -51,7 +85,7 @@ export default function WeddingEventSection() {
 
               <Link
                 href="#booking"
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gold-400 hover:bg-gold-300 text-mehndi-950 font-bold uppercase tracking-wider text-xs shadow-xl transition-all"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gold-400 hover:bg-gold-300 text-mehndi-950 font-bold uppercase tracking-wider text-xs shadow-xl transition-all hover:scale-105"
               >
                 <Calendar className="w-4 h-4 text-mehndi-950" />
                 Book Event Service
@@ -69,7 +103,7 @@ export default function WeddingEventSection() {
             </div>
 
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -13,10 +13,12 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import MobileStickyCTA from '@/components/MobileStickyCTA';
+import ScrollProgress from '@/components/ScrollProgress';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-cream-50 text-mehndi-950 font-sans selection:bg-gold-400 selection:text-mehndi-950">
+      <ScrollProgress />
       <Navbar />
       <HeroSection />
       <TrustStatsSection />
